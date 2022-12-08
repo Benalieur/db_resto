@@ -1,5 +1,5 @@
 from sqlalchemy import create_engine 
-from sqlalchemy import Column, String, Integer, Float, ForeignKey
+from sqlalchemy import Column, String, Integer, Float, ForeignKey, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
@@ -48,14 +48,16 @@ class Employee (base):
     nom = Column(String(200),nullable=False)
     adresse = Column(String(200), nullable=False)
     note = Column(Integer())
+    experience = Column(DateTime())
 
-    def __init__(self, id_employee, code_postal, poste, nom, adresse, note):
+    def __init__(self, id_employee, code_postal, poste, nom, adresse, note, experience):
         self.id_employee = id_employee
         self.code_postal = code_postal
         self.poste = poste
         self.nom = nom
         self.adresse = adresse
         self.note = note
+        self.experience = experience
 
 
 class Rib (base):
@@ -199,12 +201,12 @@ class Recette (base):
     __tablename__ = "Recette"
 
     nom_item = Column(String(),ForeignKey('Item.nom_item'), nullable=False,primary_key=True)
-    nom_ingredient = Column(String(),ForeignKey('Ingredient.nom_ingredient'),nullable=False,primary_key=True)
+    ingredient = Column(String(),ForeignKey('Ingredient.ingredient'),nullable=False,primary_key=True)
     quantité = Column(Integer(),nullable=False)
 
-    def __init__(self, nom_item, nom_ingredient, quantité):
+    def __init__(self, nom_item, ingredient, quantité):
         self.nom_item = nom_item
-        self.nom_ingredient = nom_ingredient
+        self.ingredient = ingredient
         self.quantité = quantité
 
 
@@ -212,24 +214,24 @@ class Ingredient (base):
 
     __tablename__ = "Ingredient"
 
-    nom_ingredient = Column(String(),nullable=False,primary_key=True)
-    cout = Column(Float(),nullable=False)
+    ingredient = Column(String(),nullable=False,primary_key=True)
+    prix = Column(Float(),nullable=False)
 
-    def __init__(self, nom_ingredient, cout):
-        self.nom_ingredient = nom_ingredient
-        self.cout = cout
+    def __init__(self, ingredient, prix):
+        self.ingredient = ingredient
+        self.prix = prix
 
 
 class Stock (base):
 
     __tablename__ = "Stock"
 
-    nom_ingredient = Column(String(),ForeignKey('Ingredient.nom_ingredient'),nullable=False)
+    ingredient = Column(String(),ForeignKey('Ingredient.ingredient'),nullable=False, primary_key=True)
     code_postal = Column(String(),ForeignKey('Restaurant.code_postal'),nullable=False, primary_key=True)
     quantité = Column(Integer())
 
-    def __init__(self, nom_ingredient, code_postal, quantité):
-        self.nom_ingredient = nom_ingredient
+    def __init__(self, ingredient, code_postal, quantité):
+        self.ingredient = ingredient
         self.code_postal = code_postal
         self.quantité = quantité
 
