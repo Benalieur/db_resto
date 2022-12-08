@@ -98,12 +98,10 @@ class CarteMenu (base):
 
     pays = Column(Integer(),ForeignKey('Pays.pays'), nullable=False,primary_key=True)
     id_menu = Column(Integer(),ForeignKey('Menu.id_menu'),primary_key=True,nullable=False)
-    salaire_net = Column(Float(),nullable=False)
 
-    def __init__(self, pays, id_menu, salaire_net):
+    def __init__(self, pays, id_menu):
         self.pays = pays
         self.id_menu = id_menu
-        self.salaire_net = salaire_net
 
 
 class Menu (base):
