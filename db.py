@@ -12,9 +12,6 @@ class Pays (base):
 
     pays = Column(String(255),primary_key=True)
 
-    def __init__(self, pays):
-        self.pays = pays
-
 
 class Restaurant (base):
 
@@ -51,13 +48,6 @@ class Rib (base):
     bic = Column(String(),nullable=False)
     propriètaire = Column(String(),nullable=False)
     adresse = Column(String(), nullable=False)
-
-    def __init__(self, id_employee, iban, bic, propriètaire, adresse):
-        self.id_employee = id_employee
-        self.iban = iban
-        self.bic = bic
-        self.propriètaire = propriètaire
-        self.adresse = adresse
 
 
 class Paie (base):
@@ -159,12 +149,6 @@ class Stock (base):
     ingredient = Column(String(),ForeignKey('Ingredient.ingredient'),nullable=False, primary_key=True)
     code_postal = Column(String(),ForeignKey('Restaurant.code_postal'),nullable=False, primary_key=True)
     quantité = Column(Integer())
-
-
-
-
-
-
 
 
 
