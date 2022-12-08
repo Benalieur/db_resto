@@ -28,15 +28,6 @@ class Restaurant (base):
     parking = Column(Integer, default=1)
     accessibilite = Column(Integer())
 
-    def __init__(self, code_postal, pays, capacite, espace_enfant, service_rapide, parking, accessibilite):
-        self.code_postal = code_postal
-        self.pays = pays
-        self.capacite = capacite
-        self.espace_enfant = espace_enfant
-        self.service_rapide = service_rapide
-        self.parking = parking
-        self.accessibilite = accessibilite
-
 
 class Employee (base):
 
@@ -49,15 +40,6 @@ class Employee (base):
     adresse = Column(String(200), nullable=False)
     note = Column(Integer())
     experience = Column(DateTime())
-
-    def __init__(self, id_employee, code_postal, poste, nom, adresse, note, experience):
-        self.id_employee = id_employee
-        self.code_postal = code_postal
-        self.poste = poste
-        self.nom = nom
-        self.adresse = adresse
-        self.note = note
-        self.experience = experience
 
 
 class Rib (base):
@@ -86,11 +68,6 @@ class Paie (base):
     date = Column(String(),nullable=False)
     salaire_net = Column(Float(),nullable=False)
 
-    def __init__(self, id_employee, date, salaire_net):
-        self.id_employee = id_employee
-        self.date = date
-        self.salaire_net = salaire_net
-
 
 class CarteMenu (base):
 
@@ -98,10 +75,6 @@ class CarteMenu (base):
 
     pays = Column(Integer(),ForeignKey('Pays.pays'), nullable=False,primary_key=True)
     id_menu = Column(Integer(),ForeignKey('Menu.id_menu'),primary_key=True,nullable=False)
-
-    def __init__(self, pays, id_menu):
-        self.pays = pays
-        self.id_menu = id_menu
 
 
 class Menu (base):
@@ -114,13 +87,6 @@ class Menu (base):
     dessert = Column(String(),ForeignKey('Item.nom_item'),nullable=False)
     prix = Column(Float(),nullable=False)
 
-    def __init__(self, id_menu, boisson, plat, dessert, prix):
-        self.id_menu = id_menu
-        self.boisson = boisson
-        self.plat = plat
-        self.dessert = dessert
-        self.prix = prix
-
 
 class Item (base):
 
@@ -130,10 +96,6 @@ class Item (base):
     type = Column(String(),nullable=False)
     prix = Column(Float(),nullable=False)
 
-    def __init__(self, nom_item, type, prix):
-        self.nom_item = nom_item
-        self.type = type
-        self.prix = prix
 
 class CarteItem (base):
 
@@ -141,10 +103,6 @@ class CarteItem (base):
 
     pays = Column(Integer(),ForeignKey('Pays.pays'), nullable=False,primary_key=True)
     id_item = Column(Integer(),ForeignKey('Item.nom_item'),primary_key=True,nullable=False)
-
-    def __init__(self, pays, id_item):
-        self.pays = pays
-        self.id_item = id_item
 
 
 class PanierMenu (base):
@@ -155,10 +113,6 @@ class PanierMenu (base):
     id_menu = Column(Integer(),ForeignKey('Menu.id_menu'),nullable=False)
     quantité = Column(Float(),nullable=False)
 
-    def __init__(self, id_bill, id_menu, quantité):
-        self.id_bill = id_bill
-        self.id_menu = id_menu
-        self.quantité = quantité
 
 class PanierItem (base):
 
@@ -167,11 +121,6 @@ class PanierItem (base):
     nom_item = Column(String(),ForeignKey('Item.nom_item'), nullable=False,primary_key=True)
     id_bill = Column(Integer(),ForeignKey('Bill.id_bill'),nullable=False)
     quantité = Column(Float(),nullable=False)
-
-    def __init__(self, nom_item, id_bill, quantité):
-        self.nom_item = nom_item
-        self.id_bill = id_bill
-        self.quantité = quantité
 
 
 class Bill (base):
@@ -185,14 +134,6 @@ class Bill (base):
     moyen_paiment = Column(String(),nullable=False)
     prix_total = Column(Float(),nullable=False)
 
-    def __init__(self, id_bill, code_postal, id_vendeur, born, moyen_paiment, prix_total):
-        self.code_postal = id_bill
-        self.code_postal = code_postal
-        self.id_vendeur = id_vendeur
-        self.born = born
-        self.moyen_paiment = moyen_paiment
-        self.prix_total = prix_total
-
 
 class Recette (base):
 
@@ -202,11 +143,6 @@ class Recette (base):
     ingredient = Column(String(),ForeignKey('Ingredient.ingredient'),nullable=False,primary_key=True)
     quantité = Column(Integer(),nullable=False)
 
-    def __init__(self, nom_item, ingredient, quantité):
-        self.nom_item = nom_item
-        self.ingredient = ingredient
-        self.quantité = quantité
-
 
 class Ingredient (base):
 
@@ -214,10 +150,6 @@ class Ingredient (base):
 
     ingredient = Column(String(),nullable=False,primary_key=True)
     prix = Column(Float(),nullable=False)
-
-    def __init__(self, ingredient, prix):
-        self.ingredient = ingredient
-        self.prix = prix
 
 
 class Stock (base):
@@ -227,12 +159,6 @@ class Stock (base):
     ingredient = Column(String(),ForeignKey('Ingredient.ingredient'),nullable=False, primary_key=True)
     code_postal = Column(String(),ForeignKey('Restaurant.code_postal'),nullable=False, primary_key=True)
     quantité = Column(Integer())
-
-    def __init__(self, ingredient, code_postal, quantité):
-        self.ingredient = ingredient
-        self.code_postal = code_postal
-        self.quantité = quantité
-
 
 
 
