@@ -1,9 +1,26 @@
 from sqlalchemy import create_engine 
 from sqlalchemy import Column, String, Integer, Float, ForeignKey, DateTime
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
 
-engine = create_engine("sqlite:///db.sqlite", echo=True)
+import os
+
+
+try:
+    os.remove("db/db.sqlite")
+    print('Base de données bronze supprimée.')
+except:
+    print('Pas de base de données bronze.')
+try:
+    os.remove("db/db_argent.sqlite")
+    print('Base de données argent supprimée.')
+except:
+    print('Pas de base de données argent.')
+
+
+
+
+
+engine = create_engine("sqlite:///db/db.sqlite", echo=True)
 base = declarative_base()
 
 class Pays (base):
