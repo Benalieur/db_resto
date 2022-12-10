@@ -3,8 +3,11 @@
 import pandas as pd
 import random as rd
 
-from db import engine
+from db import create_db
 
+create_db()
+
+from db import engine
 
 ## RESTAURANTS
 
