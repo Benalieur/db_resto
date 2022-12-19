@@ -119,8 +119,8 @@ def create_db():
         __tablename__ = "PanierMenu"
 
         id_bill = Column(Integer(),ForeignKey('Bill.id_bill'), nullable=False,primary_key=True)
-        id_menu = Column(Integer(),ForeignKey('Menu.id_menu'),nullable=False)
-        quantité = Column(Float(),nullable=False)
+        id_menu = Column(Integer(),ForeignKey('Menu.id_menu'),nullable=False,primary_key=True)
+        quantité = Column(Integer(),nullable=False)
 
 
     class PanierItem (base):
@@ -128,8 +128,8 @@ def create_db():
         __tablename__ = "PanierItem"
 
         nom_item = Column(String(),ForeignKey('Item.nom_item'), nullable=False,primary_key=True)
-        id_bill = Column(Integer(),ForeignKey('Bill.id_bill'),nullable=False)
-        quantité = Column(Float(),nullable=False)
+        id_bill = Column(Integer(),ForeignKey('Bill.id_bill'),nullable=False,primary_key=True)
+        quantité = Column(Integer(),nullable=False)
 
 
     class Bill (base):
@@ -139,8 +139,8 @@ def create_db():
         id_bill = Column(Integer(),primary_key=True, nullable=False)
         code_postal = Column(String(255), ForeignKey('Restaurant.code_postal'),nullable=False)
         id_vendeur = Column(Integer(),ForeignKey('Employee.id_employee'),nullable=False)
-        born = Column(Integer(),nullable=False)
-        moyen_paiment = Column(String(),nullable=False)
+        moyen_paiement = Column(String(),nullable=False)
+        borne = Column(Integer(),nullable=False)
         prix_total = Column(Float(),nullable=False)
 
 
